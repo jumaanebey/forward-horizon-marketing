@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Get PDF file path
-    const pdfPath = path.join(process.cwd(), template.pdfFile);
+    const pdfPath = path.join(process.cwd(), 'public', template.pdfFile);
     
     // Check if PDF exists
     if (!fs.existsSync(pdfPath)) {
