@@ -189,7 +189,14 @@ Forward Horizon Team`,
         success: true,
         message: 'Guide sent successfully! Check your email.',
         emailSequenceStarted: true,
-        leadId: savedLead?.id
+        leadId: savedLead?.id,
+        leadData: {
+          timestamp: new Date().toISOString(),
+          firstName,
+          email,
+          formType,
+          source: 'marketing_funnel'
+        }
       });
 
     } catch (error) {

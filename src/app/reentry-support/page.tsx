@@ -31,7 +31,17 @@ export default function ReentrySupportLanding() {
       });
 
       if (response.ok) {
+        const data = await response.json();
         trackFormSubmission('reentry', email);
+        
+        // Save lead to localStorage for dashboard
+        if (data.leadData) {
+          const existingLeads = localStorage.getItem('captured_leads');
+          const leads = existingLeads ? JSON.parse(existingLeads) : [];
+          leads.push(data.leadData);
+          localStorage.setItem('captured_leads', JSON.stringify(leads));
+        }
+        
         // Redirect to thank you page
         window.location.href = '/reentry-support/thank-you';
       } else {
