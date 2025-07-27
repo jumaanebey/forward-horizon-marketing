@@ -112,34 +112,19 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Get PDF file path
-    const pdfPath = path.join(process.cwd(), 'public', template.pdfFile);
-    
-    // Check if PDF exists
-    if (!fs.existsSync(pdfPath)) {
-      console.error(`PDF not found: ${pdfPath}`);
-      return NextResponse.json(
-        { error: 'Resource temporarily unavailable' },
-        { status: 500 }
-      );
-    }
-
-    // Personalize email body
+    // Personalize email body  
     const personalizedBody = template.body.replace(/\{firstName\}/g, firstName);
 
-    // Email options
+    // Email options (temporarily without PDF attachment for debugging)
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: email,
       subject: template.subject,
-      text: personalizedBody,
-      attachments: [
-        {
-          filename: template.pdfFile,
-          path: pdfPath,
-          contentType: 'application/pdf'
-        }
-      ]
+      text: `${personalizedBody}
+
+NOTE: Your PDF guide will be available for download at our website shortly. We'll send a follow-up email with the direct download link.
+
+Download your guide at: https://theforwardhorizon.com`,
     };
 
     // Test transporter connection
