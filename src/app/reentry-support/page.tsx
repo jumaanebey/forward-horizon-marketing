@@ -26,7 +26,7 @@ export default function ReentrySupportLanding() {
         body: JSON.stringify({
           firstName,
           email,
-          formType: 're-entry'
+          formType: 'reentry'
         }),
       });
 
