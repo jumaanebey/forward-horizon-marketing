@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path';
+import { supabase } from '../../../lib/supabase';
 
 // Email templates for each audience
 const emailTemplates = {
@@ -102,6 +103,32 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     try {
+      // Save lead to database first
+      const leadData = {
+        first_name: firstName,
+        email: email,
+        form_type: formType,
+        source: 'marketing_funnel',
+        status: 'new',
+        lead_value: 25.00,
+        pdf_delivered: false, // Will update after successful email
+        email_sequence_step: 0,
+        utm_source: request.headers.get('referer'),
+        ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'),
+        user_agent: request.headers.get('user-agent')
+      }
+
+      const { data: savedLead, error: leadError } = await supabase
+        .from('leads')
+        .insert([leadData])
+        .select()
+        .single()
+
+      if (leadError) {
+        console.error('Error saving lead:', leadError)
+        // Continue with email even if database save fails
+      }
+
       // Get PDF file
       const pdfPath = path.join(process.cwd(), 'public', template.pdfFile);
       
@@ -148,12 +175,21 @@ Follow up with this lead within 24 hours for best conversion rates.
 Forward Horizon Team`,
       });
 
+      // Update lead to mark PDF as delivered
+      if (savedLead) {
+        await supabase
+          .from('leads')
+          .update({ pdf_delivered: true })
+          .eq('id', savedLead.id)
+      }
+
       console.log(`Lead captured and emails sent: ${firstName} (${email}) - ${formType}`);
 
       return NextResponse.json({
         success: true,
         message: 'Guide sent successfully! Check your email.',
-        emailSequenceStarted: true
+        emailSequenceStarted: true,
+        leadId: savedLead?.id
       });
 
     } catch (error) {
