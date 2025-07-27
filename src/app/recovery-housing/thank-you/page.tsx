@@ -5,15 +5,27 @@ import { trackEvent } from '../../../components/Analytics';
 
 export default function RecoveryThankYou() {
   useEffect(() => {
-    // Track conversion for Google Ads
-    trackEvent('conversion', 'lead_generation', 'recovery_guide_download');
-    
-    // Google Ads conversion tracking (if gtag is available)
+    // Track conversion for Google Analytics
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'conversion', {
-        'send_to': 'AW-CONVERSION_ID/CONVERSION_LABEL', // You'll need to replace this
-        'value': 25.0,
+      // Standard form submission event
+      window.gtag('event', 'form_submit', {
+        'event_category': 'lead_generation',
+        'event_label': 'recovery_guide_download',
+        'value': 25
+      });
+      
+      // Conversion event for GA4
+      window.gtag('event', 'generate_lead', {
+        'event_category': 'conversion',
+        'event_label': 'recovery_guide',
+        'value': 25,
         'currency': 'USD'
+      });
+      
+      // Custom conversion event
+      window.gtag('event', 'conversion', {
+        'event_category': 'lead_generation',
+        'event_label': 'recovery_guide_download'
       });
     }
   }, []);
