@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import fs from 'fs';
-import path from 'path';
 
 // Email templates for each audience
 const emailTemplates = {
