@@ -32,7 +32,8 @@ export default function RecoveryHousingLanding() {
 
       if (response.ok) {
         trackFormSubmission('recovery', email);
-        setIsSubmitted(true);
+        // Redirect to thank you page
+        window.location.href = '/recovery-housing/thank-you';
       } else {
         alert('There was an error sending your guide. Please try again.');
       }

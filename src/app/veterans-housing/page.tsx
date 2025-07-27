@@ -32,7 +32,8 @@ export default function VeteransHousingLanding() {
 
       if (response.ok) {
         trackFormSubmission('veterans', email);
-        setIsSubmitted(true);
+        // Redirect to thank you page
+        window.location.href = '/veterans-housing/thank-you';
       } else {
         alert('There was an error sending your guide. Please try again.');
       }

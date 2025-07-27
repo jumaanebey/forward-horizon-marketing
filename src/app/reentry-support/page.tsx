@@ -31,8 +31,9 @@ export default function ReentrySupportLanding() {
       });
 
       if (response.ok) {
-        trackFormSubmission('re-entry', email);
-        setIsSubmitted(true);
+        trackFormSubmission('reentry', email);
+        // Redirect to thank you page
+        window.location.href = '/reentry-support/thank-you';
       } else {
         alert('There was an error sending your guide. Please try again.');
       }
