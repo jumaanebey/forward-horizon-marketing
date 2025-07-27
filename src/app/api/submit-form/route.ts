@@ -89,15 +89,26 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Check environment variables
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      console.error('Missing email configuration');
+      return NextResponse.json(
+        { error: 'Email service not configured' },
+        { status: 500 }
+      );
+    }
+
     // Get email template
     const template = emailTemplates[formType as keyof typeof emailTemplates];
 
-    // Create transporter (using Gmail SMTP for demo - in production use service like SendGrid)
+    // Create transporter with more explicit configuration
     const transporter = nodemailer.createTransporter({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 587,
+      secure: false,
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // App password, not regular password
+        pass: process.env.EMAIL_PASS,
       },
     });
 
@@ -130,6 +141,9 @@ export async function POST(request: NextRequest) {
         }
       ]
     };
+
+    // Test transporter connection
+    await transporter.verify();
 
     // Send email
     await transporter.sendMail(mailOptions);
