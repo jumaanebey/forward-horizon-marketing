@@ -169,21 +169,21 @@ export default function RecoveryHousingLanding() {
               </div>
             </div>
 
-            {/* Success Story */}
+            {/* Program Commitment */}
             <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-200 mb-8">
               <div className="flex items-center space-x-4 mb-4">
-                <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-                  <span className="text-gray-600 font-semibold">MR</span>
+                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 10-4.438 0 3.42 3.42 0 001.946.806zM6.5 9a2 2 0 11-4 0 2 2 0 014 0zM17.5 9a2 2 0 11-4 0 2 2 0 014 0zM19.5 18c0-1.381-1.119-2.5-2.5-2.5s-2.5 1.119-2.5 2.5" />
+                  </svg>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Maria R., 2 Years Sober</h4>
-                  <div className="flex text-yellow-400">
-                    ★★★★★
-                  </div>
+                  <h4 className="font-semibold text-gray-900">Our Commitment to Recovery</h4>
+                  <div className="text-green-600 font-medium">Evidence-Based Recovery Support</div>
                 </div>
               </div>
-              <p className="text-gray-700 italic">
-                "Forward Horizon saved my life. The community here doesn't just help you stay sober—they help you rebuild everything. I have a job, an apartment, and most importantly, hope."
+              <p className="text-gray-700">
+                Forward Horizon is committed to providing comprehensive recovery housing based on proven best practices. Our program combines structured support with peer community, ensuring every individual has the tools and environment needed for lasting recovery and rebuilding their life.
               </p>
             </div>
 
