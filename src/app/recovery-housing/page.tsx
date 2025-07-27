@@ -309,26 +309,26 @@ export default function RecoveryHousingLanding() {
       <div className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Recovery Success Stories</h2>
-            <p className="text-xl text-gray-600">Real results from our community</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Your Success is Our Mission</h2>
+            <p className="text-xl text-gray-600">Dedicated support every step of the way</p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">89%</div>
-              <div className="text-gray-600">Maintain Sobriety</div>
+              <div className="text-4xl font-bold text-green-600 mb-2">Personalized</div>
+              <div className="text-gray-600">Action Plans</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">250+</div>
-              <div className="text-gray-600">Lives Transformed</div>
+              <div className="text-4xl font-bold text-green-600 mb-2">Experienced</div>
+              <div className="text-gray-600">Support Team</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">95%</div>
-              <div className="text-gray-600">Find Employment</div>
+              <div className="text-4xl font-bold text-green-600 mb-2">Proven</div>
+              <div className="text-gray-600">Resources & Tools</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-green-600 mb-2">24/7</div>
-              <div className="text-gray-600">Support Available</div>
+              <div className="text-4xl font-bold text-green-600 mb-2">Dedicated</div>
+              <div className="text-gray-600">Advocacy</div>
             </div>
           </div>
         </div>
