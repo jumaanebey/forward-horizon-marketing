@@ -39,7 +39,7 @@ export const trackFormSubmission = (formType: string, email: string) => {
 export const trackPageView = (pageName: string) => {
   // Google Analytics
   if (typeof window !== 'undefined' && window.gtag) {
-    window.gtag('config', process.env.NEXT_PUBLIC_GA_ID, {
+    window.gtag('config', 'G-YG37LQ8KKE', {
       page_title: pageName,
       page_location: window.location.href,
     });
@@ -63,7 +63,7 @@ export const trackCTAClick = (ctaName: string, destination: string) => {
 };
 
 export default function Analytics() {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = 'G-YG37LQ8KKE'; // Your Google Analytics tracking ID
   const fbPixelId = process.env.NEXT_PUBLIC_FB_PIXEL_ID;
 
   useEffect(() => {
