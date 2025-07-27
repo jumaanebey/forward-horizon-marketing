@@ -101,11 +101,9 @@ export async function POST(request: NextRequest) {
     // Get email template
     const template = emailTemplates[formType as keyof typeof emailTemplates];
 
-    // Create transporter with debug logging
+    // Create transporter for Google Workspace
     const transporter = nodemailer.createTransporter({
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      service: 'gmail', // Works for both Gmail and Google Workspace
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
