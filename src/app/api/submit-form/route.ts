@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
     // Get email template
     const template = emailTemplates[formType as keyof typeof emailTemplates];
 
-    // Create transporter
+    // Create transporter with debug logging
     const transporter = nodemailer.createTransporter({
       host: 'smtp.gmail.com',
       port: 587,
@@ -110,7 +110,21 @@ export async function POST(request: NextRequest) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      debug: true,
+      logger: true
     });
+
+    // Test connection first
+    try {
+      await transporter.verify();
+      console.log('SMTP connection verified successfully');
+    } catch (verifyError) {
+      console.error('SMTP verification failed:', verifyError);
+      return NextResponse.json(
+        { error: 'Email authentication failed. Please check email settings.' },
+        { status: 500 }
+      );
+    }
 
     // Get PDF file path
     const pdfPath = path.join(process.cwd(), 'public', template.pdfFile);
