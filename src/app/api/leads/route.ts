@@ -3,6 +3,16 @@ import { supabase } from '../../../lib/supabase';
 
 export async function GET(request: NextRequest) {
   try {
+    // Check if Supabase is configured
+    if (!supabase) {
+      return NextResponse.json({
+        success: true,
+        leads: [],
+        count: 0,
+        message: 'Database not configured - using demo mode'
+      });
+    }
+
     // Get all leads from Supabase
     const { data: leads, error } = await supabase
       .from('leads')
