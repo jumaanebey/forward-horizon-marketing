@@ -37,19 +37,41 @@ export default function SimpleDashboard() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    // Load leads from localStorage (where they're stored by the marketing funnel)
-    loadLeadsFromStorage()
+    // Load leads from both API and localStorage  
+    loadAllLeads()
     
     // Set up real-time updates
-    const interval = setInterval(loadLeadsFromStorage, 30000) // Check every 30 seconds
+    const interval = setInterval(loadAllLeads, 30000) // Check every 30 seconds
     return () => clearInterval(interval)
   }, [])
 
-  const loadLeadsFromStorage = () => {
+  const loadAllLeads = async () => {
     try {
-      // Get leads from localStorage (your existing system stores them here)
+      // Get leads from API (enhanced leads with risk assessment)
+      const apiResponse = await fetch('/api/leads')
+      const apiData = await apiResponse.json()
+      
+      // Get leads from localStorage (contact form submissions)
       const storedLeads = localStorage.getItem('captured_leads')
-      const leads: LogEntry[] = storedLeads ? JSON.parse(storedLeads) : []
+      const localLeads: LogEntry[] = storedLeads ? JSON.parse(storedLeads) : []
+      
+      // Combine API leads and local leads
+      const allLeads = [...localLeads]
+      
+      // Add API leads to the mix (convert format)
+      if (apiData.success && apiData.leads) {
+        apiData.leads.forEach((apiLead: any) => {
+          allLeads.push({
+            timestamp: apiLead.created_at,
+            firstName: apiLead.first_name,
+            email: apiLead.email,
+            formType: apiLead.inquiry_type,
+            source: apiLead.lead_source || 'API'
+          })
+        })
+      }
+      
+      const leads = allLeads
 
       // Calculate real statistics
       const now = new Date()
@@ -83,8 +105,8 @@ export default function SimpleDashboard() {
       setRecentLeads(leads.slice(-10).reverse())
       
     } catch (error) {
-      console.error('Error loading leads from storage:', error)
-      // Initialize with empty data if localStorage fails
+      console.error('Error loading leads:', error)
+      // Initialize with empty data if loading fails
       setRecentLeads([])
     } finally {
       setLoading(false)
@@ -106,7 +128,7 @@ export default function SimpleDashboard() {
     leads.push(testLead)
     localStorage.setItem('captured_leads', JSON.stringify(leads))
     
-    loadLeadsFromStorage() // Refresh the display
+    loadAllLeads() // Refresh the display
   }
 
   if (loading) {
@@ -143,11 +165,17 @@ export default function SimpleDashboard() {
                 Add Test Lead
               </button>
               <button
-                onClick={loadLeadsFromStorage}
+                onClick={loadAllLeads}
                 className="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700"
               >
                 Refresh Data
               </button>
+              <a
+                href="/dashboard/advanced"
+                className="bg-purple-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-purple-700"
+              >
+                Advanced Dashboard
+              </a>
             </div>
           </div>
         </div>
