@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// Enhanced lead interface matching foreclosure dashboard structure
 interface Lead {
   id: string;
   first_name: string;
@@ -21,7 +20,7 @@ interface Lead {
 
 export async function GET(request: NextRequest) {
   try {
-    // Enhanced demo data with risk assessment and detailed information
+    // Demo leads with detailed risk assessment for Forward Horizon
     const demoLeads: Lead[] = [
       {
         id: '1',
@@ -31,7 +30,7 @@ export async function GET(request: NextRequest) {
         phone: '(626) 555-0123',
         inquiry_type: 'veterans',
         message: 'Combat veteran struggling with PTSD and housing instability. Recently discharged and need immediate transitional housing.',
-        created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(), // 2 hours ago
+        created_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
         status: 'new',
         risk_level: 'critical',
         priority_score: 95,
@@ -48,7 +47,7 @@ export async function GET(request: NextRequest) {
         phone: '(714) 555-0456',
         inquiry_type: 'recovery',
         message: 'Completed 30-day detox program last week. Looking for structured sober living environment with peer support.',
-        created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(), // 4 hours ago
+        created_at: new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString(),
         status: 'new',
         risk_level: 'high',
         priority_score: 82,
@@ -65,7 +64,7 @@ export async function GET(request: NextRequest) {
         phone: '(951) 555-0789',
         inquiry_type: 'reentry',
         message: 'Being released next month after 5 years. Need transitional housing and employment assistance for successful reintegration.',
-        created_at: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(), // 8 hours ago
+        created_at: new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString(),
         status: 'contacted',
         risk_level: 'moderate',
         priority_score: 68,
@@ -82,7 +81,7 @@ export async function GET(request: NextRequest) {
         phone: '(909) 555-0321',
         inquiry_type: 'veterans',
         message: 'Female veteran seeking information about housing programs. Currently stable but planning ahead for potential future needs.',
-        created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(), // 24 hours ago
+        created_at: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
         status: 'new',
         risk_level: 'early',
         priority_score: 45,
@@ -93,7 +92,6 @@ export async function GET(request: NextRequest) {
       }
     ];
 
-    // Calculate statistics
     const stats = {
       total: demoLeads.length,
       by_risk: {
@@ -120,12 +118,12 @@ export async function GET(request: NextRequest) {
       leads: demoLeads,
       count: demoLeads.length,
       statistics: stats,
-      message: 'Live lead data - Forward Horizon tracking system',
+      message: 'Forward Horizon lead tracking system active',
       last_updated: new Date().toISOString()
     });
 
   } catch (error) {
-    console.error('Error fetching leads:', error);
+    console.error('Error in leads API:', error);
     return NextResponse.json({
       success: false,
       error: 'Server error',
