@@ -15,7 +15,7 @@ export default function Home() {
             <span className="text-white font-bold text-2xl">FH</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Forward Horizon - Get Help Today
+            Forward Horizon - Get Help Today (Updated v2.0)
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Safe, supportive transitional housing when you need it most
