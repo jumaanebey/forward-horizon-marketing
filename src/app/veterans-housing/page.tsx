@@ -81,27 +81,6 @@ export default function VeteransHousingPage() {
         </div>
       </section>
 
-      {/* Success Story */}
-      <section className="py-16 bg-blue-50">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Veteran Success Story</h2>
-          
-          <div className="bg-white rounded-xl p-8 shadow-lg">
-            <div className="flex items-center justify-center mb-6">
-              <div className="w-20 h-20 bg-blue-200 rounded-full flex items-center justify-center">
-                <span className="text-blue-800 font-bold text-xl">JT</span>
-              </div>
-            </div>
-            <blockquote className="text-lg text-gray-700 italic mb-6">
-              "Forward Horizon gave me the stability and support I needed to get back on my feet. The staff understands what we've been through, and the community here feels like family. I went from sleeping in my car to having my own apartment and a steady job."
-            </blockquote>
-            <cite className="text-blue-600 font-semibold">
-              — James T., Army Veteran (2018-2022)
-            </cite>
-            <p className="text-gray-500 text-sm mt-2">Now employed as a logistics coordinator with full VA benefits</p>
-          </div>
-        </div>
-      </section>
 
       {/* Program Details */}
       <section className="py-16 bg-white">
@@ -163,16 +142,16 @@ export default function VeteransHousingPage() {
 
               <div className="space-y-4">
                 <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-                  <span className="font-medium text-gray-900">Average Stay Length</span>
-                  <span className="text-blue-600 font-semibold">6-12 months</span>
+                  <span className="font-medium text-gray-900">Program Duration</span>
+                  <span className="text-blue-600 font-semibold">Flexible length</span>
                 </div>
                 <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-                  <span className="font-medium text-gray-900">Success Rate</span>
-                  <span className="text-blue-600 font-semibold">87% to permanent housing</span>
+                  <span className="font-medium text-gray-900">Support Level</span>
+                  <span className="text-blue-600 font-semibold">24/7 availability</span>
                 </div>
                 <div className="flex items-center justify-between bg-gray-50 p-4 rounded-lg">
-                  <span className="font-medium text-gray-900">Veterans Housed</span>
-                  <span className="text-blue-600 font-semibold">500+ since 2015</span>
+                  <span className="font-medium text-gray-900">Service Areas</span>
+                  <span className="text-blue-600 font-semibold">4 Counties</span>
                 </div>
               </div>
             </div>
