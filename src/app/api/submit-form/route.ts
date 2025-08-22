@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
+import { trackLeadSLA, calculateSLADeadline } from '@/lib/lead-tracker';
+import crypto from 'crypto';
 
 // Handle preflight requests
 export async function OPTIONS(request: NextRequest) {
@@ -432,8 +434,26 @@ export async function POST(request: NextRequest) {
 
       console.log(`Risk Assessment: Program(${programScore}) + Urgency(${urgencyScore}) + Situation(${situationScore}) + Support(${supportScore}) = ${priorityScore} (${riskLevel})`);
     
+      // Generate unique lead ID
+      const leadId = crypto.randomUUID();
+      
+      // Add to SLA tracking system
+      const slaDeadline = calculateSLADeadline(priorityScore);
+      const leadSLA = trackLeadSLA({
+        id: leadId,
+        firstName: firstName,
+        lastName: '', // We don't capture lastName in current form
+        email: email,
+        phone: '', // We don't capture phone in current form
+        program: formType,
+        riskScore: priorityScore,
+        source: 'Main Website - theforwardhorizon.com'
+      });
+      
+      console.log(`📊 SLA Tracking: Lead ${leadId} must be contacted by ${slaDeadline.toLocaleString()}`);
 
       const leadData = {
+        id: leadId,
         timestamp: new Date().toISOString(),
         firstName: firstName,
         lastName: '', // We don't capture lastName in current form
@@ -443,6 +463,7 @@ export async function POST(request: NextRequest) {
         message: `Contact form submission from theforwardhorizon.com - ${formType} inquiry`,
         riskLevel: riskLevel,
         priorityScore: priorityScore,
+        slaDeadline: slaDeadline.toISOString(),
         source: 'Main Website - theforwardhorizon.com'
       };
 
@@ -469,20 +490,26 @@ export async function POST(request: NextRequest) {
           text: `
 NEW LEAD from theforwardhorizon.com:
 
+Lead ID: ${leadId}
 Name: ${firstName}
 Email: ${email}
 Program: ${formType}
 Risk Level: ${riskLevel.toUpperCase()}
 Priority Score: ${priorityScore}/100
 
-Message: Contact form submission from main website
+SLA DEADLINE: ${slaDeadline.toLocaleString()}
+Response Required: ${riskLevel === 'critical' ? '15 minutes' : riskLevel === 'high' ? '2 hours' : riskLevel === 'moderate' ? '24 hours' : '3 days'}
 
-Response Required: ${riskLevel === 'critical' ? '15 minutes' : riskLevel === 'high' ? '2 hours' : '24 hours'}
+URGENCY FACTORS:
+- When needed: ${urgency || 'Not specified'}
+- Current situation: ${currentSituation || 'Not specified'}
+- Support needed: ${supportNeeded || 'Not specified'}
 
 Dashboard: https://google-ads-landing-page-chi.vercel.app/dashboard/login
 
-Call: Direct contact info not captured from main site form
+Contact Info:
 Email: ${email}
+Phone: Not captured from main site form
 
 Source: theforwardhorizon.com contact form
 Timestamp: ${new Date().toLocaleString()}
