@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Forward Horizon - Get Help Today | Safe Transitional Housing',
-  description: 'Safe, supportive transitional housing for veterans, recovering individuals, and returning citizens. Immediate housing available in LA, Orange, Riverside & San Bernardino Counties. Call (626) 603-0954.',
+  title: 'Forward Horizon - Safe Housing When You Need It Most | Transitional Housing Programs',
+  description: 'Transitional housing with personalized support and community. Quick assessment helps match you with the right program. Serving LA, Orange, Riverside & San Bernardino Counties. Call (626) 603-0954.',
 }
 
 export default function Home() {
@@ -15,20 +15,29 @@ export default function Home() {
             <span className="text-white font-bold text-2xl">FH</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Forward Horizon - Get Help Today (Updated v2.0)
+            Forward Horizon - Safe Housing When You Need It Most (v2.0)
           </h1>
           <p className="text-xl text-gray-600 mb-6">
-            Safe, supportive transitional housing when you need it most
+            Transitional housing with personalized support and community
           </p>
           <div className="bg-white rounded-xl p-6 shadow-lg mb-8">
-            <p className="text-lg font-semibold text-blue-900 mb-2">🏠 Immediate Housing Available</p>
-            <p className="text-gray-700">Serving Los Angeles, Orange, Riverside & San Bernardino Counties</p>
-            <a 
-              href="tel:+1-626-603-0954" 
-              className="inline-block mt-4 bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-colors"
-            >
-              📞 Call Now: (626) 603-0954
-            </a>
+            <p className="text-lg font-semibold text-blue-900 mb-2">🏠 Housing Programs Available Now</p>
+            <p className="text-gray-600 mb-2">Quick assessment helps us match you with the right program</p>
+            <p className="text-gray-700 mb-4">Serving Los Angeles, Orange, Riverside & San Bernardino Counties & Surrounding Areas</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a 
+                href="tel:+1-626-603-0954" 
+                className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors"
+              >
+                📞 Immediate Help: (626) 603-0954
+              </a>
+              <a 
+                href="/contact" 
+                className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors"
+              >
+                📧 Info & Applications
+              </a>
+            </div>
           </div>
         </div>
 

@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Forward Horizon - Get Help Today',
-  description: 'Contact Forward Horizon for transitional housing, veteran support, recovery housing, and reentry services. We\'re here to help 24/7.',
+  title: 'Contact Forward Horizon - Quick Assessment & Program Matching',
+  description: 'Get matched with the right housing program through our quick assessment. Contact Forward Horizon for transitional housing, veteran support, recovery housing, and reentry services.',
 }
 
 export default function ContactPage() {
@@ -26,10 +26,15 @@ export default function ContactPage() {
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Contact Forward Horizon</h1>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Ready to take the next step? We're here to help guide you through the process and answer your questions.
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Get Matched with the Right Program</h1>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto mb-4">
+              Our quick assessment helps us understand your needs and match you with the best housing program for your situation.
             </p>
+            <div className="bg-blue-100 border border-blue-300 rounded-lg p-4 max-w-2xl mx-auto">
+              <p className="text-blue-800 font-medium">
+                ✨ Smart Assessment: Answer a few questions to help us prioritize your request and connect you with the right resources
+              </p>
+            </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
@@ -193,7 +198,7 @@ export default function ContactPage() {
                     <span className="text-white text-xl">📞</span>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900">Phone</h4>
+                    <h4 className="text-lg font-semibold text-gray-900">Immediate Help</h4>
                     <p className="text-gray-600">(626) 603-0954</p>
                     <p className="text-sm text-gray-500">24/7 crisis support available</p>
                   </div>
@@ -204,8 +209,8 @@ export default function ContactPage() {
                     <span className="text-white text-xl">✉️</span>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900">Email</h4>
-                    <p className="text-gray-600">admin@theforwardhorizon.com</p>
+                    <h4 className="text-lg font-semibold text-gray-900">Info & Applications</h4>
+                    <p className="text-gray-600">contact@theforwardhorizon.com</p>
                     <p className="text-sm text-gray-500">We respond within 24 hours</p>
                   </div>
                 </div>
@@ -216,8 +221,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900">Location</h4>
-                    <p className="text-gray-600">Serving Los Angeles County, Orange County, Riverside County, & San Bernardino County</p>
-                    <p className="text-sm text-gray-500">Multiple housing locations</p>
+                    <p className="text-gray-600">Serving Los Angeles, Orange, Riverside & San Bernardino Counties & Surrounding Areas</p>
+                    <p className="text-sm text-gray-500">Multiple housing locations available</p>
                   </div>
                 </div>
 
