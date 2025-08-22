@@ -2,7 +2,7 @@
   "crons": [
     {
       "path": "/api/sla-monitor",
-      "schedule": "*/15 * * * *"
+      "schedule": "0 8 * * *"
     }
   ]
 }
