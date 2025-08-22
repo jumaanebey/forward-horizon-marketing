@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllTrackedLeads, getOverdueLeads, getLeadStats, exportLeadData } from '@/lib/lead-tracker';
+import { getAllLeadsHybrid, getOverdueLeadsHybrid, getLeadStatsHybrid, exportLeadData } from '@/lib/lead-tracker';
 
 // SLA Dashboard API - provides monitoring data
 export async function GET(request: NextRequest) {
@@ -10,9 +10,9 @@ export async function GET(request: NextRequest) {
 
     console.log('📊 SLA Dashboard: Fetching monitoring data...');
     
-    const stats = getLeadStats();
-    const overdueLeads = getOverdueLeads();
-    const allLeads = getAllTrackedLeads();
+    const stats = await getLeadStatsHybrid();
+    const overdueLeads = await getOverdueLeadsHybrid();
+    const allLeads = await getAllLeadsHybrid();
     
     const dashboardData = {
       timestamp: new Date().toISOString(),

@@ -437,9 +437,9 @@ export async function POST(request: NextRequest) {
       // Generate unique lead ID
       const leadId = crypto.randomUUID();
       
-      // Add to SLA tracking system
+      // Add to SLA tracking system (dual storage)
       const slaDeadline = calculateSLADeadline(priorityScore);
-      const leadSLA = trackLeadSLA({
+      const leadSLA = await trackLeadSLA({
         id: leadId,
         firstName: firstName,
         lastName: '', // We don't capture lastName in current form

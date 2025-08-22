@@ -1,5 +1,7 @@
-// Simple lead tracking system that works with existing Google Sheets integration
-// This bridges the gap until full Supabase implementation
+// Dual-storage lead tracking system: Supabase + Google Sheets
+// Provides database reliability with familiar Google Sheets workflow
+
+import { supabaseOperations, Lead as SupabaseLead } from './supabase';
 
 interface LeadSLA {
   id: string;
@@ -39,8 +41,8 @@ export function calculateSLADeadline(riskScore: number, createdAt: Date = new Da
   return deadline;
 }
 
-// Add lead to SLA tracking
-export function trackLeadSLA(lead: {
+// Add lead to SLA tracking with dual storage (Supabase + Google Sheets)
+export async function trackLeadSLA(lead: {
   id: string;
   firstName: string;
   lastName?: string;
@@ -66,7 +68,33 @@ export function trackLeadSLA(lead: {
     source: lead.source
   };
   
+  // Add to in-memory tracker (for immediate access)
   leadSLATracker.push(leadSLA);
+  
+  // Save to Supabase (async - don't block if it fails)
+  try {
+    const supabaseLead = await supabaseOperations.insertLead({
+      id: lead.id,
+      first_name: lead.firstName,
+      last_name: lead.lastName || '',
+      email: lead.email,
+      phone: lead.phone,
+      program: lead.program,
+      risk_score: lead.riskScore,
+      risk_level: lead.riskScore >= 80 ? 'Critical' : 
+                  lead.riskScore >= 60 ? 'High' :
+                  lead.riskScore >= 30 ? 'Moderate' : 'Early',
+      source: lead.source,
+      status: 'New Lead',
+      sla_deadline: slaDeadline.toISOString()
+    });
+    
+    if (supabaseLead) {
+      console.log(`✅ Lead saved to Supabase: ${leadSLA.name}`);
+    }
+  } catch (error) {
+    console.warn('⚠️  Supabase save failed (continuing with Google Sheets):', error);
+  }
   
   console.log(`📊 Lead SLA tracked: ${leadSLA.name} - Deadline: ${slaDeadline.toLocaleString()}`);
   return leadSLA;
@@ -81,15 +109,28 @@ export function getOverdueLeads(): LeadSLA[] {
   );
 }
 
-// Update lead status
-export function updateLeadStatus(leadId: string, status: LeadSLA['status']) {
+// Update lead status with dual storage sync
+export async function updateLeadStatus(leadId: string, status: LeadSLA['status'], notes?: string) {
+  // Update in-memory tracker
   const lead = leadSLATracker.find(l => l.id === leadId);
   if (lead) {
     lead.status = status;
-    console.log(`📊 Lead status updated: ${leadId} -> ${status}`);
-    return true;
   }
-  return false;
+  
+  // Update in Supabase (async)
+  try {
+    const supabaseStatus = status === 'new' ? 'New Lead' :
+                          status === 'contacted' ? 'Contacted' :
+                          status === 'in_progress' ? 'In Progress' :
+                          status === 'completed' ? 'Completed' : 'New Lead';
+                          
+    await supabaseOperations.updateLeadStatus(leadId, supabaseStatus, notes);
+    console.log(`📊 Lead status updated in both systems: ${leadId} -> ${status}`);
+    return true;
+  } catch (error) {
+    console.warn('⚠️  Supabase update failed (in-memory updated):', error);
+    return lead ? true : false;
+  }
 }
 
 // Get all tracked leads
@@ -138,6 +179,90 @@ export function exportLeadData() {
     source: lead.source,
     minutesUntilDeadline: Math.round((lead.slaDeadline.getTime() - new Date().getTime()) / (1000 * 60))
   }));
+}
+
+// Hybrid functions that can use Supabase when available, fallback to in-memory
+
+// Get all leads from best available source
+export async function getAllLeadsHybrid(): Promise<LeadSLA[]> {
+  try {
+    const supabaseLeads = await supabaseOperations.getAllLeads();
+    if (supabaseLeads.length > 0) {
+      // Convert Supabase format to LeadSLA format
+      return supabaseLeads.map(lead => ({
+        id: lead.id,
+        name: `${lead.first_name} ${lead.last_name}`.trim(),
+        email: lead.email || '',
+        phone: lead.phone || '',
+        program: lead.program,
+        riskScore: lead.risk_score,
+        createdAt: new Date(lead.created_at),
+        slaDeadline: new Date(lead.sla_deadline),
+        status: lead.status === 'New Lead' ? 'new' :
+                lead.status === 'Contacted' ? 'contacted' :
+                lead.status === 'In Progress' ? 'in_progress' :
+                lead.status === 'Completed' ? 'completed' : 'new',
+        source: lead.source
+      }));
+    }
+  } catch (error) {
+    console.warn('⚠️  Using in-memory data (Supabase unavailable)');
+  }
+  
+  return leadSLATracker;
+}
+
+// Get overdue leads from best available source
+export async function getOverdueLeadsHybrid(): Promise<LeadSLA[]> {
+  try {
+    const supabaseOverdue = await supabaseOperations.getOverdueLeads();
+    if (supabaseOverdue.length >= 0) { // Could be 0 but still valid
+      return supabaseOverdue.map(lead => ({
+        id: lead.id,
+        name: `${lead.first_name} ${lead.last_name}`.trim(),
+        email: lead.email || '',
+        phone: lead.phone || '',
+        program: lead.program,
+        riskScore: lead.risk_score,
+        createdAt: new Date(lead.created_at),
+        slaDeadline: new Date(lead.sla_deadline),
+        status: lead.status === 'New Lead' ? 'new' :
+                lead.status === 'Contacted' ? 'contacted' :
+                lead.status === 'In Progress' ? 'in_progress' :
+                lead.status === 'Completed' ? 'completed' : 'new',
+        source: lead.source
+      }));
+    }
+  } catch (error) {
+    console.warn('⚠️  Using in-memory overdue data (Supabase unavailable)');
+  }
+  
+  return getOverdueLeads(); // fallback to in-memory
+}
+
+// Get enhanced statistics from best available source
+export async function getLeadStatsHybrid() {
+  try {
+    const supabaseStats = await supabaseOperations.getLeadStats();
+    if (supabaseStats.total >= 0) { // Could be 0 but still valid
+      return {
+        total: supabaseStats.total,
+        overdue: supabaseStats.overdue,
+        critical: supabaseStats.critical,
+        high: supabaseStats.high,
+        moderate: supabaseStats.moderate,
+        onTime: supabaseStats.total - supabaseStats.overdue,
+        pending: supabaseStats.pending,
+        contacted: supabaseStats.contacted,
+        completed: supabaseStats.completed,
+        early: supabaseStats.early
+      };
+    }
+  } catch (error) {
+    console.warn('⚠️  Using in-memory stats (Supabase unavailable)');
+  }
+  
+  return getLeadStats(); // fallback to in-memory
 }
 
 // Clean up old completed leads (run periodically)

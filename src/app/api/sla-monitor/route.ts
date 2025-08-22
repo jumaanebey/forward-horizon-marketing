@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { getOverdueLeadsHybrid } from '@/lib/lead-tracker';
 
 // SLA Monitor API - called by Vercel Cron or external scheduler
 export async function GET(request: NextRequest) {
@@ -8,7 +9,7 @@ export async function GET(request: NextRequest) {
     
     // Get current time for SLA calculations
     const now = new Date();
-    const overdueLeads = await checkOverdueLeads(now);
+    const overdueLeads = await getOverdueLeadsHybrid();
     
     let alertsSent = 0;
     
