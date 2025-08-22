@@ -158,7 +158,7 @@ export async function POST(request: NextRequest) {
     console.log('API route called! - v3.0 - LATEST VERSION');
     
     // Handle both JSON and form data
-    let firstName, email, formType;
+    let firstName, lastName, email, phone, message, formType, urgency, currentSituation, supportNeeded;
     
     const contentType = request.headers.get('content-type');
     console.log('Content type:', contentType);
@@ -166,14 +166,26 @@ export async function POST(request: NextRequest) {
     if (contentType?.includes('application/json')) {
       const data = await request.json();
       firstName = data.firstName;
+      lastName = data.lastName;
       email = data.email;
+      phone = data.phone;
+      message = data.message;
       formType = data.formType;
+      urgency = data.urgency;
+      currentSituation = data.current_situation;
+      supportNeeded = data.support_needed;
     } else {
       // Handle form data
       const formData = await request.formData();
       firstName = formData.get('firstName')?.toString();
+      lastName = formData.get('lastName')?.toString();
       email = formData.get('email')?.toString();
-      formType = formData.get('inquiry_type')?.toString(); // Fixed typo
+      phone = formData.get('phone')?.toString();
+      message = formData.get('message')?.toString();
+      formType = formData.get('inquiry_type')?.toString();
+      urgency = formData.get('urgency')?.toString();
+      currentSituation = formData.get('current_situation')?.toString();
+      supportNeeded = formData.get('support_needed')?.toString();
       
       // Check if this is a redirect request (fallback form submission)
       const isRedirect = formData.get('redirect');
@@ -344,20 +356,82 @@ export async function POST(request: NextRequest) {
 
     // Send lead to Google Sheets and Dashboard system
     try {
-      // Calculate risk level based on form type
-      let riskLevel = 'moderate';
-      let priorityScore = 60;
-      
+      // Calculate risk level based on user responses
+      let riskLevel = 'early';
+      let priorityScore = 30;
+
+      // Start with base program type scoring
+      let programScore = 0;
       if (formType === 'veteran-housing' || formType === 'veterans') {
-        riskLevel = 'high';
-        priorityScore = 75;
+        programScore = 20;
       } else if (formType === 'sober-living' || formType === 'recovery') {
-        riskLevel = 'high';
-        priorityScore = 80;
+        programScore = 25;
       } else if (formType === 'Re-entry-housing' || formType === 'reentry') {
-        riskLevel = 'moderate';
-        priorityScore = 65;
+        programScore = 15;
+      } else {
+        programScore = 5; // Other inquiries
       }
+
+      // Add urgency scoring
+      let urgencyScore = 0;
+      if (urgency === 'immediate') {
+        urgencyScore = 50; // Critical
+      } else if (urgency === 'within-week') {
+        urgencyScore = 35; // High
+      } else if (urgency === 'within-month') {
+        urgencyScore = 20; // Moderate
+      } else if (urgency === 'future-planning') {
+        urgencyScore = 5; // Early/Planning
+      } else if (urgency === 'not-applicable') {
+        urgencyScore = 0; // Not seeking housing
+      }
+
+      // Add current situation scoring
+      let situationScore = 0;
+      if (currentSituation === 'crisis') {
+        situationScore = 30; // Crisis situation
+      } else if (currentSituation === 'transitioning') {
+        situationScore = 25; // Transitioning out
+      } else if (currentSituation === 'unstable') {
+        situationScore = 15; // Unstable housing
+      } else if (currentSituation === 'stable-planning') {
+        situationScore = 5; // Stable but planning
+      } else if (currentSituation === 'other-support') {
+        situationScore = 0; // Other support needs
+      }
+
+      // Add support needed scoring
+      let supportScore = 0;
+      if (supportNeeded === 'emergency-housing') {
+        supportScore = 20; // Emergency need
+      } else if (supportNeeded === 'program-entry') {
+        supportScore = 15; // Program entry help
+      } else if (supportNeeded === 'information') {
+        supportScore = 5; // Information seeking
+      } else if (supportNeeded === 'application-help') {
+        supportScore = 10; // Application help
+      } else if (supportNeeded === 'other-services') {
+        supportScore = 8; // Other services
+      } else if (supportNeeded === 'giving-back') {
+        supportScore = 0; // Volunteering/donating
+      }
+
+      // Calculate total priority score
+      priorityScore = programScore + urgencyScore + situationScore + supportScore;
+
+      // Determine risk level based on total score
+      if (priorityScore >= 80) {
+        riskLevel = 'critical';
+      } else if (priorityScore >= 60) {
+        riskLevel = 'high';
+      } else if (priorityScore >= 30) {
+        riskLevel = 'moderate';
+      } else {
+        riskLevel = 'early';
+      }
+
+      console.log(`Risk Assessment: Program(${programScore}) + Urgency(${urgencyScore}) + Situation(${situationScore}) + Support(${supportScore}) = ${priorityScore} (${riskLevel})`);
+    
 
       const leadData = {
         timestamp: new Date().toISOString(),

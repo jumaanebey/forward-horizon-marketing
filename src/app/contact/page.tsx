@@ -102,15 +102,73 @@ export default function ContactPage() {
                   </select>
                 </div>
 
+                {/* Risk Assessment Questions */}
+                <div className="bg-blue-50 p-6 rounded-lg border-2 border-blue-200">
+                  <h3 className="text-lg font-semibold text-blue-900 mb-4">Help Us Prioritize Your Request</h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label htmlFor="urgency" className="block text-sm font-medium text-gray-700 mb-2">When do you need housing assistance? *</label>
+                      <select 
+                        id="urgency" 
+                        name="urgency" 
+                        required 
+                        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
+                      >
+                        <option value="">Select timeframe</option>
+                        <option value="immediate">Immediately - I have no safe place to stay tonight</option>
+                        <option value="within-week">Within the next week - My current situation ends soon</option>
+                        <option value="within-month">Within the next month - Planning ahead</option>
+                        <option value="future-planning">Future planning - Gathering information for later</option>
+                        <option value="not-applicable">Not applicable - Not seeking housing</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="current-situation" className="block text-sm font-medium text-gray-700 mb-2">Which best describes your current situation? *</label>
+                      <select 
+                        id="current-situation" 
+                        name="current_situation" 
+                        required 
+                        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
+                      >
+                        <option value="">Select situation</option>
+                        <option value="crisis">In crisis - Homeless or unsafe housing</option>
+                        <option value="transitioning">Transitioning - Leaving treatment/facility/incarceration</option>
+                        <option value="unstable">Unstable housing - May lose current place soon</option>
+                        <option value="stable-planning">Stable but planning - Looking ahead</option>
+                        <option value="other-support">Other - Volunteering, donating, or partnerships</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label htmlFor="support-needed" className="block text-sm font-medium text-gray-700 mb-2">What type of support do you need most? *</label>
+                      <select 
+                        id="support-needed" 
+                        name="support_needed" 
+                        required 
+                        className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-h-[48px]"
+                      >
+                        <option value="">Select primary need</option>
+                        <option value="emergency-housing">Emergency housing placement</option>
+                        <option value="program-entry">Help entering a specific program</option>
+                        <option value="information">Information about services and eligibility</option>
+                        <option value="application-help">Help with applications and paperwork</option>
+                        <option value="other-services">Other services or support</option>
+                        <option value="giving-back">Want to volunteer or donate</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">Additional Details</label>
                   <textarea 
                     id="message" 
                     name="message" 
                     rows={4} 
-                    required 
                     className="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
-                    placeholder="Tell us how we can help you or how you'd like to get involved..."
+                    placeholder="Please share any additional details that would help us assist you better..."
                   />
                 </div>
 
