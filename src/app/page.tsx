@@ -15,7 +15,7 @@ export default function Home() {
             <span className="text-white font-bold text-2xl">FH</span>
           </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Forward Horizon - Safe Housing When You Need It Most (v2.0)
+            Forward Horizon - Safe Housing When You Need It Most
           </h1>
           <p className="text-xl text-gray-600 mb-6">
             Transitional housing with personalized support and community
