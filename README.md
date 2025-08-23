@@ -1,0 +1,29 @@
+## Lead Funnel (FastAPI)
+
+- Intake leads, auto-nudge via SMS/email, answer simple FAQs, and drive scheduling.
+
+### Quickstart
+
+1. Create env
+```
+cp .env.example .env
+```
+2. Install deps
+```
+pip install -r requirements.txt
+```
+3. Run server
+```
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### Endpoints
+- POST `/leads` — create lead {name, email?, phone?, source?}
+- GET `/leads/{id}` — fetch lead
+- POST `/webhooks/inbound` — inbound message {lead_id, channel: sms|email, content}
+- POST `/webhooks/scheduled` — scheduling webhook params: lead_id, meeting_url
+
+### Notes
+- Messages are logged to stdout by default; swap `MessageSender` with providers.
+- Nudges run every `NUDGE_INTERVAL_MINUTES` (default 240). APScheduler runs in background.
+- Data persisted to SQLite at `/workspace/data/leads.db`.
