@@ -129,7 +129,7 @@ function ThankYouContent() {
               Need immediate assistance?
             </h3>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8">
-              <a href="tel:+13104885280" className="flex items-center text-blue-600 hover:text-blue-800 font-semibold bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
+              <a href="tel:+1-310-488-5280" className="flex items-center text-blue-600 hover:text-blue-800 font-semibold bg-white px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-1">
                 <span className="mr-2 text-lg">📞</span>
                 (310) 488-5280
               </a>

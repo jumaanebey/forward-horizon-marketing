@@ -1,0 +1,12 @@
+{
+  "timestamp": "2025-08-23T04:35:30.919Z",
+  "projectRoot": "/Users/jumaanebey/Documents/forward-horizon-marketing",
+  "errors": [],
+  "warnings": [
+    "Analytics may not be configured in: src/components/ClientAnalytics.tsx",
+    "\n⚠️  WARNINGS: 1",
+    "  • Analytics may not be configured in: src/components/ClientAnalytics.tsx",
+    "  • \n⚠️  WARNINGS: 1"
+  ],
+  "status": "healthy"
+}

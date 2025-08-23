@@ -201,10 +201,10 @@ export default function UserDashboard({ userRole }: UserDashboardProps) {
                   variant="outline" 
                   className="w-full" 
                   size="sm"
-                  onClick={() => window.open('tel:+16268887776', '_self')}
+                  onClick={() => window.open('tel:+1-310-488-5280', '_self')}
                 >
                   <Phone className="w-4 h-4 mr-2" />
-                  Call (626) 888-7776
+                  Call (310) 488-5280
                 </Button>
                 <Button 
                   variant="outline" 
@@ -282,10 +282,10 @@ export default function UserDashboard({ userRole }: UserDashboardProps) {
                 variant="outline" 
                 size="lg"
                 className="px-8 py-3"
-                onClick={() => window.open('tel:+16268887776', '_self')}
+                onClick={() => window.open('tel:+1-310-488-5280', '_self')}
               >
                 <Phone className="w-4 h-4 mr-2" />
-                Call Now: (626) 888-7776
+                Call Now: (310) 488-5280
               </Button>
             </div>
             <p className="text-sm text-gray-600 mt-4">
