@@ -212,7 +212,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900">Info & Applications</h4>
-                    <p className="text-gray-600">contact@theforwardhorizon.com</p>
+                    <p className="text-gray-600">admin@theforwardhorizon.com</p>
                     <p className="text-sm text-gray-500">We respond within 24 hours</p>
                   </div>
                 </div>
