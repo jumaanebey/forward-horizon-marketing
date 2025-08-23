@@ -151,7 +151,7 @@ Forward Horizon has immediate placement available for qualifying veterans:
 • Community of fellow veterans
 • Job placement assistance
 
-Don't wait. Call (626) 603-0954 now or download our Veterans Benefits Guide for immediate resources."
+Don't wait. Call (310) 488-5280 now or download our Veterans Benefits Guide for immediate resources."
 
 **Headline:** "Emergency Veterans Housing"
 **CTA:** Call Now
@@ -456,7 +456,7 @@ fbq('track', 'Contact', {
 ## Crisis Response Messaging
 
 ### For Recovery Audience:
-"If you're struggling with cravings or having thoughts of using, you don't have to face this alone. Call our 24/7 support line: (626) 603-0954"
+"If you're struggling with cravings or having thoughts of using, you don't have to face this alone. Call our 24/7 support line: (310) 488-5280"
 
 ### For All Audiences:
 "In crisis? National Suicide Prevention Lifeline: 988. You matter, and help is available."
