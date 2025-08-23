@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 import fs from 'fs';
 import path from 'path';
 import { trackLeadSLA, calculateSLADeadline } from '@/lib/lead-tracker';
+import { saveLeadToSupabase } from '@/lib/supabase-lead-tracker';
 import crypto from 'crypto';
 
 // Handle preflight requests
@@ -439,7 +440,7 @@ export async function POST(request: NextRequest) {
       
       // Add to SLA tracking system (dual storage)
       const slaDeadline = calculateSLADeadline(priorityScore);
-      const leadSLA = await trackLeadSLA({
+      const leadSLA = trackLeadSLA({
         id: leadId,
         firstName: firstName,
         lastName: '', // We don't capture lastName in current form
@@ -449,6 +450,24 @@ export async function POST(request: NextRequest) {
         riskScore: priorityScore,
         source: 'Main Website - theforwardhorizon.com'
       });
+      
+      // DUAL STORAGE: Save to both Supabase and in-memory tracker
+      const supabaseLead = await saveLeadToSupabase({
+        id: leadId,
+        firstName: firstName,
+        lastName: '',
+        email: email,
+        phone: '',
+        program: formType,
+        riskScore: priorityScore,
+        source: 'Main Website - theforwardhorizon.com'
+      });
+      
+      if (supabaseLead) {
+        console.log(`💾 Lead saved to Supabase: ${leadId}`);
+      } else {
+        console.log(`⚠️ Lead saved to memory tracker only: ${leadId}`);
+      }
       
       console.log(`📊 SLA Tracking: Lead ${leadId} must be contacted by ${slaDeadline.toLocaleString()}`);
 
