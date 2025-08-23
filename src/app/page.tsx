@@ -101,12 +101,6 @@ export default function Home() {
         <div className="text-center mt-12 space-y-4">
           <div>
             <a 
-              href="/dashboard/simple" 
-              className="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-700 mr-4"
-            >
-              📊 View Lead Dashboard
-            </a>
-            <a 
               href="https://theforwardhorizon.com" 
               className="text-blue-600 hover:text-blue-700 font-medium"
             >
