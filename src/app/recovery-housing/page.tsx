@@ -221,10 +221,10 @@ export default function RecoveryHousingPage() {
               Apply for Recovery Housing
             </Link>
             <a 
-              href="tel:+1-626-603-0954" 
+              href="tel:+1-310-488-5280" 
               className="bg-yellow-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-yellow-600 transition-colors"
             >
-              Call Now: (626) 603-0954
+              Call Now: (310) 488-5280
             </a>
           </div>
           
@@ -245,8 +245,8 @@ export default function RecoveryHousingPage() {
           </div>
           <p className="text-gray-400 mb-6">Supporting your recovery journey with safe, sober living</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8">
-            <a href="tel:+1-626-603-0954" className="text-green-400 hover:text-green-300 font-semibold">
-              📞 (626) 603-0954
+            <a href="tel:+1-310-488-5280" className="text-green-400 hover:text-green-300 font-semibold">
+              📞 (310) 488-5280
             </a>
             <Link href="/contact" className="text-green-400 hover:text-green-300">
               📧 Contact Form

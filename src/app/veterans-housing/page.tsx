@@ -175,10 +175,10 @@ export default function VeteransHousingPage() {
               Apply for Veterans Housing
             </Link>
             <a 
-              href="tel:+1-626-603-0954" 
+              href="tel:+1-310-488-5280" 
               className="bg-red-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-red-700 transition-colors"
             >
-              Call Now: (626) 603-0954
+              Call Now: (310) 488-5280
             </a>
           </div>
           
@@ -199,8 +199,8 @@ export default function VeteransHousingPage() {
           </div>
           <p className="text-gray-400 mb-6">Supporting veterans in their transition to civilian life</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8">
-            <a href="tel:+1-626-603-0954" className="text-blue-400 hover:text-blue-300 font-semibold">
-              📞 (626) 603-0954
+            <a href="tel:+1-310-488-5280" className="text-blue-400 hover:text-blue-300 font-semibold">
+              📞 (310) 488-5280
             </a>
             <Link href="/contact" className="text-blue-400 hover:text-blue-300">
               📧 Contact Form

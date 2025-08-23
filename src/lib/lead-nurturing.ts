@@ -65,7 +65,7 @@ I'm here to support you. You served our country - now let us serve you.
 Best regards,
 Jumaane Bey
 Forward Horizon
-(626) 603-0954`
+(310) 488-5280`
     },
     followUp24hr: {
       subject: "🏠 Veterans Housing Update - Let's Connect",
@@ -86,7 +86,7 @@ When would be a good time for you today or tomorrow? I have openings at:
 - Today: 2:00 PM, 4:30 PM
 - Tomorrow: 10:00 AM, 1:00 PM, 3:30 PM
 
-Just reply with your preferred time, or call me directly at (626) 603-0954.
+Just reply with your preferred time, or call me directly at (310) 488-5280.
 
 Honor and respect,
 Jumaane Bey`
@@ -137,7 +137,7 @@ Thank you for reaching out about our recovery housing program. Taking this step 
 In recovery together,
 Jumaane Bey
 Forward Horizon
-(626) 603-0954`
+(310) 488-5280`
     },
     followUp24hr: {
       subject: "🤝 Checking in - Recovery housing support",
@@ -181,7 +181,7 @@ Your recovery is worth fighting for.
 
 Believing in you,
 Jumaane Bey
-(626) 603-0954`
+(310) 488-5280`
     }
   },
 
@@ -208,7 +208,7 @@ Thank you for reaching out about our re-entry housing program. I want you to kno
 Looking forward to supporting your fresh start,
 Jumaane Bey
 Forward Horizon
-(626) 603-0954`
+(310) 488-5280`
     },
     followUp24hr: {
       subject: "🏠 Re-entry housing follow-up - Your questions answered",

@@ -249,7 +249,7 @@ export default function NurturePage() {
                             {sendingEmail === lead.id ? '⏳' : '📧'} Email
                           </button>
                           <a 
-                            href="tel:+1-626-603-0954"
+                            href="tel:+1-310-488-5280"
                             className="text-green-600 hover:text-green-800 text-sm font-medium"
                           >
                             📞 Call

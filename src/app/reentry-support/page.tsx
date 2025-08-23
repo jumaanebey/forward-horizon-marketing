@@ -280,10 +280,10 @@ export default function ReentrySupportPage() {
               Apply for Re-entry Support
             </Link>
             <a 
-              href="tel:+1-626-603-0954" 
+              href="tel:+1-310-488-5280" 
               className="bg-orange-500 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-orange-600 transition-colors"
             >
-              Call Now: (626) 603-0954
+              Call Now: (310) 488-5280
             </a>
           </div>
           
@@ -304,8 +304,8 @@ export default function ReentrySupportPage() {
           </div>
           <p className="text-gray-400 mb-6">Believing in second chances and new beginnings</p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-8">
-            <a href="tel:+1-626-603-0954" className="text-purple-400 hover:text-purple-300 font-semibold">
-              📞 (626) 603-0954
+            <a href="tel:+1-310-488-5280" className="text-purple-400 hover:text-purple-300 font-semibold">
+              📞 (310) 488-5280
             </a>
             <Link href="/contact" className="text-purple-400 hover:text-purple-300">
               📧 Contact Form

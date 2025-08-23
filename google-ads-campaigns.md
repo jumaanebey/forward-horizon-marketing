@@ -86,7 +86,7 @@
 **Headline 2:** Veterans Deserve Stable Housing
 **Headline 3:** Get Your Free Benefits Guide
 **Description 1:** Maximize your VA benefits while living in a supportive veteran community. Safe housing + case management + job assistance.
-**Description 2:** Download our Veterans Benefits Guide with housing checklist. Call (626) 603-0954 for immediate assistance.
+**Description 2:** Download our Veterans Benefits Guide with housing checklist. Call (310) 488-5280 for immediate assistance.
 **Final URL:** https://your-domain.com/veterans-housing
 
 #### Ad 2: Community-Focused
@@ -102,7 +102,7 @@
 **Headline 2:** Need Housing Today?
 **Headline 3:** Immediate Placement Available
 **Description 1:** Don't spend another night unsure where you'll sleep. We have emergency placement for qualifying veterans.
-**Description 2:** Call (626) 603-0954 now or get our housing guide instantly.
+**Description 2:** Call (310) 488-5280 now or get our housing guide instantly.
 **Final URL:** https://your-domain.com/veterans-housing
 
 ---
@@ -150,7 +150,7 @@
 **Headline 2:** Comprehensive Re-entry Support
 **Headline 3:** Housing + Services Available
 **Description 1:** Complete re-entry support: housing, employment, legal aid, life skills. Community of people who understand.
-**Description 2:** Download your planning kit or call (626) 603-0954 for immediate assistance.
+**Description 2:** Download your planning kit or call (310) 488-5280 for immediate assistance.
 **Final URL:** https://your-domain.com/re-entry-support
 
 #### Ad 3: Success-Focused
@@ -281,7 +281,7 @@ gtag('event', 'conversion', {
 - Free Consultation
 
 ### Call Extensions:
-- Phone: (626) 603-0954
+- Phone: (310) 488-5280
 - Call tracking enabled for conversion measurement
 
 ### Location Extensions:

@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Forward Horizon - Safe Housing When You Need It Most | Transitional Housing Programs',
-  description: 'Transitional housing with personalized support and community. Quick assessment helps match you with the right program. Serving LA, Orange, Riverside & San Bernardino Counties. Call (626) 603-0954.',
+  description: 'Transitional housing with personalized support and community. Quick assessment helps match you with the right program. Serving LA, Orange, Riverside & San Bernardino Counties. Call (310) 488-5280.',
 }
 
 export default function Home() {
@@ -26,10 +26,10 @@ export default function Home() {
             <p className="text-gray-700 mb-4">Serving Los Angeles, Orange, Riverside & San Bernardino Counties & Surrounding Areas</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a 
-                href="tel:+1-626-603-0954" 
+                href="tel:+1-310-488-5280" 
                 className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors"
               >
-                📞 Immediate Help: (626) 603-0954
+                📞 Immediate Help: (310) 488-5280
               </a>
               <a 
                 href="/contact" 
@@ -91,10 +91,10 @@ export default function Home() {
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-4">Need immediate assistance?</p>
           <a 
-            href="tel:+1-626-603-0954" 
+            href="tel:+1-310-488-5280" 
             className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
           >
-            📞 Call (626) 603-0954
+            📞 Call (310) 488-5280
           </a>
         </div>
 
