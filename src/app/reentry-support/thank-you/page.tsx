@@ -92,7 +92,7 @@ export default function ReentryThankYou() {
           </a>
           
           <div className="text-gray-600">
-            <p>Need immediate support? <a href="tel:+1-626-603-0954" className="text-purple-600 font-semibold">(626) 603-0954</a></p>
+            <p>Need immediate support? <a href="tel:+1-310-488-5280" className="text-purple-600 font-semibold">(310) 488-5280</a></p>
           </div>
         </div>
 

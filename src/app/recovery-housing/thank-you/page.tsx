@@ -92,7 +92,7 @@ export default function RecoveryThankYou() {
           </a>
           
           <div className="text-gray-600">
-            <p>24/7 Support: <a href="tel:+1-626-603-0954" className="text-green-600 font-semibold">(626) 603-0954</a></p>
+            <p>24/7 Support: <a href="tel:+1-310-488-5280" className="text-green-600 font-semibold">(310) 488-5280</a></p>
           </div>
         </div>
 

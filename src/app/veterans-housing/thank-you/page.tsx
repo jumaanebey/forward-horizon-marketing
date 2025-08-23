@@ -92,7 +92,7 @@ export default function VeteransThankYou() {
           </a>
           
           <div className="text-gray-600">
-            <p>Questions? Call us at <a href="tel:+1-626-603-0954" className="text-blue-600 font-semibold">(626) 603-0954</a></p>
+            <p>Questions? Call us at <a href="tel:+1-310-488-5280" className="text-blue-600 font-semibold">(310) 488-5280</a></p>
           </div>
         </div>
 
