@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import ClientAnalytics from '@/components/ClientAnalytics';
 
 export const metadata: Metadata = {
   title: 'Veterans Housing | Forward Horizon - Transitional Housing for Veterans',
@@ -9,6 +10,7 @@ export const metadata: Metadata = {
 export default function VeteransHousingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-blue-100">
+      <ClientAnalytics pageName="Veterans Housing" />
       {/* Navigation */}
       <nav className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4">

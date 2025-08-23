@@ -1,14 +1,16 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import ClientAnalytics from '@/components/ClientAnalytics';
 
 export const metadata: Metadata = {
-  title: 'Re-entry Support | Forward Horizon - Transitional Housing After Incarceration',
+  title: 'Re-Entry Support | Forward Horizon - Transitional Housing After Incarceration',
   description: 'Comprehensive re-entry support and transitional housing for individuals returning to the community. Second chances, stable housing, and pathway to independence.',
 };
 
 export default function ReentrySupportPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-purple-100">
+      <ClientAnalytics pageName="Re-Entry Support" />
       {/* Navigation */}
       <nav className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4">

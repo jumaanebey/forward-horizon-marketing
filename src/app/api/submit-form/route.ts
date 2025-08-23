@@ -4,6 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { trackLeadSLA, calculateSLADeadline } from '@/lib/lead-tracker';
 import { saveLeadToSupabase } from '@/lib/supabase-lead-tracker';
+import { Analytics } from '@/lib/analytics-tracker';
 import crypto from 'crypto';
 
 // Handle preflight requests
@@ -233,7 +234,7 @@ export async function POST(request: NextRequest) {
     const formTypeMapping: { [key: string]: string } = {
       'veteran-housing': 'veterans',
       'sober-living': 'recovery', 
-      'Re-entry-housing': 'reentry',
+      'Re-Entry-housing': 'reentry',
       'volunteer': 'general',
       'donate': 'general',
       'partner': 'general',
@@ -438,6 +439,9 @@ export async function POST(request: NextRequest) {
       // Generate unique lead ID
       const leadId = crypto.randomUUID();
       
+      // Track form submission analytics
+      Analytics.trackFormSubmit(formType, leadId, priorityScore, formType);
+      
       // Add to SLA tracking system (dual storage)
       const slaDeadline = calculateSLADeadline(priorityScore);
       const leadSLA = trackLeadSLA({
@@ -498,6 +502,9 @@ export async function POST(request: NextRequest) {
           body: JSON.stringify(leadData),
         });
         console.log('✅ Lead sent to Google Sheets dashboard system');
+        
+        // Track conversion analytics
+        Analytics.trackConversion(leadId, formType, priorityScore);
       }
 
       // Send notification email to Forward Horizon team

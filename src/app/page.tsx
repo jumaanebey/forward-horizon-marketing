@@ -1,5 +1,7 @@
 import Link from 'next/link';
-import { Metadata } from 'next'
+import { Metadata } from 'next';
+import ClientAnalytics from '@/components/ClientAnalytics';
+import TrackingLink from '@/components/TrackingLink';
 
 export const metadata: Metadata = {
   title: 'Forward Horizon - Safe Housing When You Need It Most | Transitional Housing Programs',
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100">
+      <ClientAnalytics pageName="Home" />
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <div className="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mx-auto mb-6">
@@ -25,18 +28,22 @@ export default function Home() {
             <p className="text-gray-600 mb-2">Quick assessment helps us match you with the right program</p>
             <p className="text-gray-700 mb-4">Serving Los Angeles, Orange, Riverside & San Bernardino Counties & Surrounding Areas</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a 
+              <TrackingLink
                 href="tel:+1-310-488-5280" 
                 className="bg-red-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-red-700 transition-colors"
+                trackingType="phone"
+                trackingData="Home Page CTA"
               >
                 📞 Immediate Help: (310) 488-5280
-              </a>
-              <a 
+              </TrackingLink>
+              <TrackingLink
                 href="/contact" 
                 className="bg-blue-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-700 transition-colors"
+                trackingType="cta"
+                trackingData="Info & Applications"
               >
                 📧 Info & Applications
-              </a>
+              </TrackingLink>
             </div>
           </div>
         </div>
@@ -77,7 +84,7 @@ export default function Home() {
               <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-6">
                 <span className="text-2xl">🏠</span>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-3">Re-entry Support</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">Re-Entry Support</h3>
               <p className="text-gray-600 mb-4">
                 Comprehensive support for individuals transitioning back to the community after incarceration.
               </p>
@@ -90,12 +97,14 @@ export default function Home() {
 
         <div className="text-center mt-16">
           <p className="text-gray-600 mb-4">Need immediate assistance?</p>
-          <a 
+          <TrackingLink
             href="tel:+1-310-488-5280" 
             className="inline-flex items-center bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            trackingType="phone"
+            trackingData="Home Page Footer"
           >
             📞 Call (310) 488-5280
-          </a>
+          </TrackingLink>
         </div>
 
         <div className="text-center mt-12 space-y-4">

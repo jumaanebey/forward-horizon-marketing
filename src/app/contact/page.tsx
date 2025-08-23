@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import ClientAnalytics from '@/components/ClientAnalytics'
 
 export const metadata: Metadata = {
   title: 'Contact Forward Horizon - Quick Assessment & Program Matching',
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50">
+      <ClientAnalytics pageName="Contact" />
       {/* Navigation */}
       <nav className="bg-white shadow-lg">
         <div className="max-w-7xl mx-auto px-4">
@@ -99,7 +101,7 @@ export default function ContactPage() {
                     <option value="">Select an option</option>
                     <option value="veteran-housing">Veteran Transitional Housing</option>
                     <option value="sober-living">Sober Living After Detox</option>
-                    <option value="Re-entry-housing">Re-entry Housing</option>
+                    <option value="Re-Entry-housing">Re-Entry Housing</option>
                     <option value="volunteer">Volunteering</option>
                     <option value="donate">Making a Donation</option>
                     <option value="partner">Community Partnership</option>
