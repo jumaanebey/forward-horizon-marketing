@@ -27,3 +27,21 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 - Messages are logged to stdout by default; swap `MessageSender` with providers.
 - Nudges run every `NUDGE_INTERVAL_MINUTES` (default 240). APScheduler runs in background.
 - Data persisted to SQLite at `/workspace/data/leads.db`.
+
+### Docker (FastAPI worker)
+
+1. Copy env file
+```
+cp .env.docker.example .env
+```
+2. Build and run
+```
+docker compose up -d --build
+```
+3. Verify
+```
+curl http://localhost:8000/openapi.json
+```
+
+- Data persists in a named volume `lead_data` at `/data/leads.db` inside the container.
+- Configure `SCHEDULING_URL` and `NUDGE_INTERVAL_MINUTES` in `.env`.

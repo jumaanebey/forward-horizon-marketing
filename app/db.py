@@ -1,8 +1,10 @@
 import sqlite3
+import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-DB_PATH = Path("/workspace/data/leads.db")
+DB_PATH_STR = os.getenv("DB_PATH", "data/leads.db")
+DB_PATH = Path(DB_PATH_STR)
 DB_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 

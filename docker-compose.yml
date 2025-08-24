@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  lead-worker:
+    build: .
+    image: lead-funnel-worker:latest
+    container_name: lead-funnel-worker
+    environment:
+      - SCHEDULING_URL=${SCHEDULING_URL}
+      - NUDGE_INTERVAL_MINUTES=${NUDGE_INTERVAL_MINUTES:-240}
+      - DB_PATH=/data/leads.db
+    volumes:
+      - lead_data:/data
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+volumes:
+  lead_data:
+    driver: local
