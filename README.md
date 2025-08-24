@@ -45,3 +45,16 @@ curl http://localhost:8000/openapi.json
 
 - Data persists in a named volume `lead_data` at `/data/leads.db` inside the container.
 - Configure `SCHEDULING_URL` and `NUDGE_INTERVAL_MINUTES` in `.env`.
+
+### Deploy (free options)
+
+Render (recommended free worker):
+- Connect repo in Render
+- Use `render.yaml`; set `SCHEDULING_URL` and optional env
+- Deploy; health check uses `/openapi.json`
+
+Fly.io (free hobby):
+- Install flyctl, login
+- fly launch --no-deploy (uses `fly.toml`)
+- fly volumes create lead_data --size 1
+- fly deploy

@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: lead-funnel-worker
+    env: docker
+    dockerfilePath: ./Dockerfile
+    branch: main
+    healthCheckPath: /openapi.json
+    plan: free
+    autoDeploy: true
+    envVars:
+      - key: SCHEDULING_URL
+        sync: false
+      - key: NUDGE_INTERVAL_MINUTES
+        value: 240
+      - key: DB_PATH
+        value: /data/leads.db
+    disks:
+      - name: data
+        mountPath: /data
+        sizeGB: 1
