@@ -3,6 +3,7 @@
 
 import { supabaseOperations } from './supabase';
 import nodemailer from 'nodemailer';
+import crypto from 'crypto'
 
 export interface NurtureTask {
   id: string;
@@ -31,7 +32,7 @@ export interface Lead {
 
 // Email transporter setup
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
@@ -356,8 +357,8 @@ export async function sendNurtureEmail(lead: Lead, templateType: 'immediate' | '
       from: `"Jumaane Bey - Forward Horizon" <${process.env.EMAIL_USER}>`,
       to: lead.email,
       subject: personalizedSubject,
-      text: personalizedTemplate,
-      html: personalizedTemplate.replace(/\n/g, '<br>')
+      text: personalizedTemplate + (process.env.APP_BASE_URL ? `\n\nSchedule a quick chat: ${process.env.APP_BASE_URL}/book` : ''),
+      html: personalizedTemplate.replace(/\n/g, '<br>') + (process.env.APP_BASE_URL ? `<br><br><a href="${process.env.APP_BASE_URL}/book">Schedule a quick chat</a>` : '')
     };
 
     await transporter.sendMail(mailOptions);

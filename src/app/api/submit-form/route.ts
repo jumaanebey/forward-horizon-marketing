@@ -160,6 +160,12 @@ The Forward Horizon Reentry Team`
 export async function POST(request: NextRequest) {
   try {
     console.log('API route called! - v3.0 - LATEST VERSION');
+
+    // Basic API key check (optional)
+    const apiKey = request.headers.get('x-api-key');
+    if (process.env.FORM_API_KEY && apiKey !== process.env.FORM_API_KEY) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
     
     // Handle both JSON and form data
     let firstName, lastName, email, phone, message, formType, urgency, currentSituation, supportNeeded;
