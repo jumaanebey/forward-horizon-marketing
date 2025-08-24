@@ -214,3 +214,28 @@ export const supabaseOperations = {
     }
   }
 };
+
+export const supabaseLookup = {
+  async byEmail(email: string) {
+    if (!supabase) return null;
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .ilike('email', email)
+      .order('created_at', { ascending: false })
+      .limit(1);
+    if (error) return null;
+    return (data && data[0]) || null;
+  },
+  async byPhone(phone: string) {
+    if (!supabase) return null;
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .ilike('phone', `%${phone.replace(/\D/g, '')}%`)
+      .order('created_at', { ascending: false })
+      .limit(1);
+    if (error) return null;
+    return (data && data[0]) || null;
+  }
+};

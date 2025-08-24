@@ -131,20 +131,30 @@ def set_scheduled(lead_id: int, scheduled_url: str) -> None:
         conn.close()
 
 
+def clear_next_nudge(lead_id: int) -> None:
+	conn = get_connection()
+	try:
+		cur = conn.cursor()
+		cur.execute("UPDATE leads SET next_nudge_at = NULL WHERE id = ?", (lead_id,))
+		conn.commit()
+	finally:
+		conn.close()
+
+
 def due_nudges(limit: int = 50) -> List[Dict[str, Any]]:
-    conn = get_connection()
-    try:
-        cur = conn.cursor()
-        cur.execute(
-            """
-            SELECT * FROM leads
-            WHERE status != 'scheduled' AND next_nudge_at IS NOT NULL AND next_nudge_at <= DATETIME('now')
-            ORDER BY next_nudge_at ASC
-            LIMIT ?
-            """,
-            (limit,),
-        )
-        rows = cur.fetchall()
-        return [dict(r) for r in rows]
-    finally:
-        conn.close()
+	conn = get_connection()
+	try:
+		cur = conn.cursor()
+		cur.execute(
+			"""
+			SELECT * FROM leads
+			WHERE status NOT IN ('scheduled','engaged','closed') AND next_nudge_at IS NOT NULL AND next_nudge_at <= DATETIME('now')
+			ORDER BY next_nudge_at ASC
+			LIMIT ?
+			""",
+			(limit,),
+		)
+		rows = cur.fetchall()
+		return [dict(r) for r in rows]
+	finally:
+		conn.close()

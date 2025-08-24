@@ -3,6 +3,10 @@
     {
       "path": "/api/sla-monitor",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron-nurture",
+      "schedule": "0 * * * *"
     }
   ]
 }

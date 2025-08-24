@@ -4,7 +4,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic_settings import BaseSettings
 
-from app.db import init_db, create_lead, get_lead, record_message, increment_nudges, set_next_nudge, due_nudges, set_scheduled, set_status
+from app.db import init_db, create_lead, get_lead, record_message, increment_nudges, set_next_nudge, due_nudges, set_scheduled, set_status, clear_next_nudge
 from app.models import LeadCreate, LeadOut, InboundMessage
 from app.messaging import MessageSender
 from app.faq import answer_for
@@ -113,6 +113,20 @@ def inbound_message(payload: InboundMessage) -> Dict[str, Any]:
             sender.send_email(lead["email"], "Schedule link", sender.call_to_action_text())
             record_message(payload.lead_id, "outbound", "email", "Scheduling link sent")
         set_status(payload.lead_id, "engaged")
+        clear_next_nudge(payload.lead_id)
+        return {"ok": True}
+
+    # Opt-out handling
+    if payload.content.strip().lower() in {"stop", "unsubscribe", "cancel"}:
+        set_status(payload.lead_id, "closed")
+        clear_next_nudge(payload.lead_id)
+        if payload.channel == "sms" and lead.get("phone"):
+            sender.send_sms(lead["phone"], "You have been unsubscribed. No further messages will be sent.")
+            record_message(payload.lead_id, "outbound", "sms", "Unsubscribe confirmation")
+        elif payload.channel == "email" and lead.get("email"):
+            sender.send_email(lead["email"], "Unsubscribed", "You have been unsubscribed. No further messages will be sent.")
+            record_message(payload.lead_id, "outbound", "email", "Unsubscribe confirmation")
+        return {"ok": True}
     return {"ok": True}
 
 
@@ -122,6 +136,7 @@ def scheduled_callback(lead_id: int, meeting_url: str) -> Dict[str, Any]:
     if not lead:
         raise HTTPException(404, "Lead not found")
     set_scheduled(lead_id, meeting_url)
+    clear_next_nudge(lead_id)
     if lead.get("phone"):
         sender.send_sms(lead["phone"], "You're all set. Calendar invite sent!")
         record_message(lead_id, "outbound", "sms", "Scheduled confirmation sent")

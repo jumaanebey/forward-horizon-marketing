@@ -3,6 +3,7 @@
 
 import { supabaseOperations } from './supabase';
 import nodemailer from 'nodemailer';
+import crypto from 'crypto'
 
 export interface NurtureTask {
   id: string;
@@ -31,7 +32,7 @@ export interface Lead {
 
 // Email transporter setup
 const createTransporter = () => {
-  return nodemailer.createTransporter({
+  return nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
