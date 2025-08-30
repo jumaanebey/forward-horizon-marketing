@@ -49,6 +49,11 @@ This is the **marketing website repository** for Forward Horizon's transitional 
 3. Check for any recent updates or critical information
 4. Confirm phone numbers and contact information
 
+### Autonomous Sessions (No-Approval Windows)
+- If `CLAUDE_AUTONOMOUS_SESSION.md` exists, follow it as the active directive for the specified duration (default 20 minutes).
+- Proceed without seeking approvals for routine, low-risk edits outlined there.
+- Skip and note any destructive or high-risk changes; move to the next item.
+
 ### When Making Changes
 1. Update `CLAUDE_PROJECT_STATUS.md` with planned changes
 2. Test thoroughly before deployment
